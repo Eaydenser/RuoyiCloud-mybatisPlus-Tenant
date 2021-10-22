@@ -1,0 +1,1 @@
+./minio.exe server D:\Projiect\RuoYi-Cloud\fileTemp

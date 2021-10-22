@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ruoyi.common.datascope.aspect.DataScopeAspect,\
+  com.ruoyi.common.datascope.config.MybatisPlusConfiguration,\
+  com.ruoyi.common.datascope.config.MyMetaObjectHandler,\
+  com.ruoyi.common.datascope.config.MyDataScopeInterceptor
+
+  

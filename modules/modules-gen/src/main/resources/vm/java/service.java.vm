@@ -1,0 +1,23 @@
+package ${packageName}.service;
+
+import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import ${packageName}.domain.${ClassName};
+
+/**
+ * ${functionName}Service接口
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface I${ClassName}Service extends IService<${ClassName}>
+{
+    /**
+     * 租户1所有内容copy到租户2，租户2会被清空
+     *
+     * @param tenantId 租户ID
+     * @return 参数配置信息
+     */
+    public Long copyByTenant(Long tenantId,Long byTenantId);
+}

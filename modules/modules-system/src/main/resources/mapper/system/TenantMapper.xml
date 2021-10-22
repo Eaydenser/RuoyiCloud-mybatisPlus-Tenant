@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TenantMapper">
+    
+    <resultMap type="Tenant" id="TenantResult">
+        <result property="tenantId"    column="tenant_id"    />
+        <result property="tenantUrl"    column="tenant_url"    />
+        <result property="tenantAdmin"    column="tenant_admin"    />
+        <result property="tenantName"    column="tenant_name"    />
+        <result property="version"    column="version"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="enableFlag"    column="enable_flag"    />
+    </resultMap>
+
+    <sql id="selectTenantVo">
+        select tenant_id, tenant_url, tenant_admin, tenant_name, version, create_by, create_time, update_by, update_time, enable_flag from tenant
+    </sql>
+
+</mapper>

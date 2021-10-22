@@ -1,0 +1,54 @@
+    package ${packageName}.service.impl;
+
+import java.util.List;
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+import com.ruoyi.common.core.utils.DateUtils;
+#break
+#end
+#end
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+#if($table.sub)
+import java.util.ArrayList;
+import com.ruoyi.common.core.utils.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import ${packageName}.domain.${subClassName};
+#end
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * ${functionName}Service业务层处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${ClassName}> implements I${ClassName}Service
+{
+    /**
+     * 租户1所有内容copy到租户2，租户2会被清空
+     *
+     * @param tenantId 租户ID
+     * @return 参数配置信息
+     */
+    @Override
+    @Transactional
+    public Long copyByTenant(Long tenantId,Long byTenantId)
+    {
+        List<${ClassName}> be${ClassName}List = baseMapper.selectAllByTenantId(tenantId);
+        //删除所有当前租户配置
+        ${ClassName} query${ClassName} = new ${ClassName}();
+        query${ClassName}.setTenantId(byTenantId);
+        baseMapper.delete(new QueryWrapper<>(query${ClassName}));
+        //插入所有配置
+        be${ClassName}List.forEach(c->c.setTenantId(byTenantId));
+        saveBatch(be${ClassName}List);
+        List<${ClassName}> by${ClassName}List = baseMapper.selectAllByTenantId(byTenantId);
+        return be${ClassName}List.stream().count()-by${ClassName}List.stream().count();
+    }
+}

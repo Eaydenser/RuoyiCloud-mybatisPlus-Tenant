@@ -1,0 +1,23 @@
+package ${packageName}.mapper;
+
+import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
+import org.apache.ibatis.annotations.Select;
+import ${packageName}.domain.${ClassName};
+#if($table.sub)
+import ${packageName}.domain.${subClassName};
+#end
+
+/**
+ * ${functionName}Mapper接口
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${ClassName}Mapper  extends BaseMapper<${ClassName}>
+{
+    @InterceptorIgnore(tenantLine = "true")
+    @Select(value = "select * from ${tableName} where tenant_id = #{id, jdbcType=BIGINT}")
+    public List<SysConfig>  selectAllByTenantId(Long id);
+}
